@@ -14,7 +14,7 @@ module Simpler
     end
 
     def render(binding)
-      send(RENDER_TYPE[template.keys.first], binding)
+      send(template ? RENDER_TYPE[template.keys.first] : :file_render, binding)
     end
 
     private
@@ -32,7 +32,7 @@ module Simpler
     end
 
     def template_path
-      path = template[:file] || [controller.name, action].join('/')
+      path = template ? template[:file] : [controller.name, action].join('/')
 
       Simpler.root.join(VIEW_BASE_PATH, "#{path}.html.erb")
     end
