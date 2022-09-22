@@ -47,6 +47,7 @@ module Simpler
     end
 
     def render(template)
+      template = { file: template} unless template.is_a?(Hash)
       @request.env['simpler.template'] = template
     end
 
