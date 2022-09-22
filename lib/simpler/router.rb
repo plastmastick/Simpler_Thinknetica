@@ -2,6 +2,7 @@ require_relative 'router/route'
 
 module Simpler
   class Router
+    attr_reader :routes
 
     def initialize
       @routes = []
@@ -17,7 +18,7 @@ module Simpler
 
     def route_for(env)
       method = env['REQUEST_METHOD'].downcase.to_sym
-      path = env['PATH_INFO']
+      path = env['REQUEST_PATH']
 
       @routes.find { |route| route.match?(method, path) }
     end

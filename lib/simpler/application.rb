@@ -9,7 +9,7 @@ module Simpler
 
     include Singleton
 
-    attr_reader :db
+    attr_reader :db, :app_routes, :router
 
     def initialize
       @router = Router.new
@@ -24,6 +24,10 @@ module Simpler
 
     def routes(&block)
       @router.instance_eval(&block)
+
+      route_paths = {}
+      @router.routes.each { |route| route_paths[route.path] = Simpler.application}
+      @app_routes = Rack::URLMap.new(route_paths)
     end
 
     def call(env)
