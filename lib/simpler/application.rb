@@ -34,6 +34,7 @@ module Simpler
       route = @router.route_for(env)
       controller = route.controller.new(env)
       action = route.action
+      env['simpler.request_params'] = setup_params(route, env['REQUEST_PATH'])
 
       make_response(controller, action)
     end
@@ -56,6 +57,20 @@ module Simpler
 
     def make_response(controller, action)
       controller.make_response(action)
+    end
+
+    def setup_params(route, path)
+      params = {}
+      self_elements = route.route_elements
+      path_elements = path.split('/')
+
+
+      path_elements.each do |e|
+        p_index = path_elements.index(e)
+        params[self_elements[p_index]] = e.to_i if e.to_i.positive? && self_elements[p_index].is_a?(Symbol)
+      end
+
+      params
     end
 
   end
