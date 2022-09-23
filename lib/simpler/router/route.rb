@@ -16,7 +16,7 @@ module Simpler
       end
 
       def route_elements
-        @path.split('/').map { |e| e.include?(':') ? e[1..].to_sym : e }
+        @path.split('/').map { |e| e.start_with?(':') ? e[1..].to_sym : e }
       end
 
       private
