@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 require_relative 'router/route'
 
 module Simpler
   class Router
+    attr_reader :routes
 
     def initialize
       @routes = []
@@ -17,7 +20,7 @@ module Simpler
 
     def route_for(env)
       method = env['REQUEST_METHOD'].downcase.to_sym
-      path = env['PATH_INFO']
+      path = env['REQUEST_PATH']
 
       @routes.find { |route| route.match?(method, path) }
     end
@@ -36,6 +39,5 @@ module Simpler
     def controller_from_string(controller_name)
       Object.const_get("#{controller_name.capitalize}Controller")
     end
-
   end
 end

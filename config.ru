@@ -1,3 +1,7 @@
-require_relative 'config/environment'
+# frozen_string_literal: true
 
-run Simpler.application
+require_relative 'config/environment'
+require_relative 'lib/middleware/logger'
+
+use AppLogger
+run Simpler.application.app_routes
