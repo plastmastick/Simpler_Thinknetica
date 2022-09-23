@@ -3,7 +3,6 @@
 require 'logger'
 
 class AppLogger
-
   def initialize(app)
     @logger = Logger.new(Simpler.root.join('log/app.log'))
     @app = app
@@ -26,8 +25,3 @@ class AppLogger
     }
   end
 end
-
-# Request: GET /tests?category=Backend
-# Handler: TestsController#index
-# Parameters: {'category' => 'Backend'}
-# Response: 200 OK [text/html] tests/index.html.erb

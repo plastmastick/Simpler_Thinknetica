@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Simpler
   class Router
     class Route
-
       attr_reader :controller, :action, :path
 
       def initialize(method, path, controller, action)
@@ -25,13 +26,11 @@ module Simpler
         self_elements = route_elements
         path_elements = path.split('/')
 
-
         path_elements.map do |e|
           p_index = path_elements.index(e)
           e.to_i.positive? && self_elements[p_index].is_a?(Symbol) ? ":#{self_elements[p_index]}" : e
         end.join('/')
       end
-
     end
   end
 end

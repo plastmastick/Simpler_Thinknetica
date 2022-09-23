@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require_relative 'view'
 
 module Simpler
   class Controller
-
     attr_reader :name, :request, :response
 
     def initialize(env)
@@ -60,6 +61,5 @@ module Simpler
     def responce_headers_set(headers)
       headers.each { |k, v| @response[k.to_s] = v.to_s }
     end
-
   end
 end

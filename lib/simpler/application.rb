@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 require 'singleton'
 require 'sequel'
@@ -6,7 +8,6 @@ require_relative 'controller'
 
 module Simpler
   class Application
-
     include Singleton
 
     attr_reader :db, :app_routes, :router
@@ -26,7 +27,7 @@ module Simpler
       @router.instance_eval(&block)
 
       route_paths = {}
-      @router.routes.each { |route| route_paths[route.path] = Simpler.application}
+      @router.routes.each { |route| route_paths[route.path] = Simpler.application }
       @app_routes = Rack::URLMap.new(route_paths)
     end
 
@@ -64,7 +65,6 @@ module Simpler
       self_elements = route.route_elements
       path_elements = path.split('/')
 
-
       path_elements.each do |e|
         p_index = path_elements.index(e)
         params[self_elements[p_index]] = e.to_i if e.to_i.positive? && self_elements[p_index].is_a?(Symbol)
@@ -72,6 +72,5 @@ module Simpler
 
       params
     end
-
   end
 end

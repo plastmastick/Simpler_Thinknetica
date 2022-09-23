@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 require 'erb'
 
 module Simpler
   class View
-
-    VIEW_BASE_PATH = 'app/views'.freeze
+    VIEW_BASE_PATH = 'app/views'
     RENDER_TYPE = {
       file: :file_render,
       plain: :plain_render
@@ -47,6 +48,5 @@ module Simpler
     def plain_render(_binding)
       template[:plain]
     end
-
   end
 end
